@@ -1,0 +1,28 @@
+<!-- La diferencia entre formularios por template y reactivos radica en donde está la lógica de nuestra App. 
+     En los templates la lógica en mayor medida está en el html y angular los controla de una forma más automática. 
+     En los reactivos la lógica está más en el typeScript y nosotros tenemos más control sobre ellos -->
+
+<h2>Template</h2>
+<hr>
+
+<!-- Creamos todos los items desde la variable del fichero typeScript -->
+<ul class="list-group">
+    <li *ngFor="let item of templateMenu"
+        class="list-group-item"
+        [routerLink]="[item.ruta]"
+        routerLinkActive="active">
+        {{ item.texto }}
+    </li>
+</ul>
+
+<h2>Reactive</h2>
+<hr>
+<!-- Creamos todos los items desde la variable del fichero typeScript -->
+<ul class="list-group">
+    <li *ngFor="let item of ReactiveMenu"
+        class="list-group-item"
+        [routerLink]="[item.ruta]"
+        routerLinkActive="active">
+        {{ item.texto }}
+    </li>
+</ul>

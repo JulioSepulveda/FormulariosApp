@@ -1,0 +1,90 @@
+<h2>Template:<small> Dinámicos </small></h2>
+<hr>
+
+<form (ngSubmit)="guardar()" 
+      #miFormulario="ngForm"
+      autocomplete="off">
+
+    <!-- Nombre -->
+    <!-- Con el ngModel podemos asignar el valor de la variable persona -->
+    <!-- keyup.enter nos sirve para indcar que tiene que hacer cuando se pulsa enter dentro del input -->
+    <div class="mb-3 row">
+        <label class="col-sm-3 col-form-label">Nombre</label>
+        <div class="col-sm-9">
+            <input class="form-control" 
+                   placeholder="Nombre de la persona"
+                   [ngModel]="persona.nombre"
+                   name="nombre"
+                   required>
+
+            <span class="form-text text-danger"
+                   *ngIf=" this.miFormulario.controls.nombre?.errors && this.miFormulario.controls.nombre?.touched">
+                 Este campo es obligatorio
+             </span>
+        </div>
+    </div>
+
+    <!-- Agregar -->
+    <!-- Input con botón dentro de él -->
+    <div class="mb-3 row">
+        <label class="col-sm-3 col-form-label">Agregar</label>
+        <div class="col-sm-9">
+
+            <div class="input-group">
+                <input class="form-control" 
+                   placeholder="Agregar favorito"
+                   [(ngModel)]="nuevoJuego"
+                   (keyup.enter)="agregar()"
+                   name="nuevoJuego">
+                   
+
+                <button class="btn btn-outline-primary"
+                        type="button"
+                        (click)="agregar()">
+                    Agregar
+                </button>
+            </div>           
+        </div>
+    </div>
+
+    <!-- Lista de Juegos Favoritos -->
+    <!-- Para rellenar los favoritos de manera dinámica lo realizamos con *ngFor. De esta forma crea tantas celdas como favoritos haya. Para crearlos tenemos que 
+         poner un nombre dinamico a cada celda de modo que cada una se llame diferente -->
+         <!-- Con el ngModel recubierto de [()] conseguimos que si la celda se modifica, se modifique también el valor en la variable -->
+    <div class="mb-3 row">
+        <label class="col-sm-3 col-form-label">Favoritos</label>
+        <div class="col-sm-9">
+
+            <div class="input-group"
+                 *ngFor="let juego of persona.favoritos; let i = index">
+
+                <input [(ngModel)]="juego.nombre"
+                       name="favorito_ {{ i }}"
+                       class="form-control mb-1"
+                       required>
+
+                <button class="btn btn-outline-danger"
+                        type="button"
+                        (click)="eliminar(i)">
+                    Eliminar
+                </button>
+
+            </div>
+            
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <button type="button"
+                    class="btn btn-primary float-end"
+                    [disabled]="miFormulario.invalid"
+                    (click)="guardar()">
+                Guardar
+            </button>
+        </div>
+    </div>
+</form>
+
+<span>Persona</span>
+<pre>{{ persona | json }}</pre>
