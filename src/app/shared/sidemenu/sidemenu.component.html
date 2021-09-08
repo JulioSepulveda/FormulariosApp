@@ -19,7 +19,19 @@
 <hr>
 <!-- Creamos todos los items desde la variable del fichero typeScript -->
 <ul class="list-group">
-    <li *ngFor="let item of ReactiveMenu"
+    <li *ngFor="let item of reactiveMenu"
+        class="list-group-item"
+        [routerLink]="[item.ruta]"
+        routerLinkActive="active">
+        {{ item.texto }}
+    </li>
+</ul>
+
+<h2>Validaciones</h2>
+<hr>
+<!-- Creamos todos los items desde la variable del fichero typeScript -->
+<ul class="list-group">
+    <li *ngFor="let item of authMenu"
         class="list-group-item"
         [routerLink]="[item.ruta]"
         routerLinkActive="active">

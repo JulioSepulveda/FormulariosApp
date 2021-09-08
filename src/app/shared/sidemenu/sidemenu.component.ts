@@ -30,7 +30,7 @@ export class SidemenuComponent {
     },
   ];
 
-  ReactiveMenu: MenuItem[] = [
+  reactiveMenu: MenuItem[] = [
     {
       texto: 'basicos',
       ruta: './reactive/basicos'
@@ -42,6 +42,17 @@ export class SidemenuComponent {
     {
       texto: 'switches',
       ruta: './reactive/switches'
+    },
+  ];
+
+  authMenu: MenuItem[] = [
+    {
+      texto: 'registro',
+      ruta: './auth/registro'
+    },
+    {
+      texto: 'login',
+      ruta: './auth/login'
     },
   ];
 

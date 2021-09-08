@@ -1,0 +1,141 @@
+<h2>Validaciones Reactivas</h2>
+<hr>
+
+<div class="row">
+    <div class="col">
+
+        <form autocomplete="off" 
+              [formGroup]="miFormulario"
+              (ngSubmit)="submitFormulario()">
+
+            <!-- Nombre -->
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Nombre</label>
+                <div class="col-sm-9">
+                    <input type="text"
+                           class="form-control"
+                           formControlName="nombre"
+                           placeholder="Nombre del usuario">
+
+                    <span class="form-text text-danger"
+                           *ngIf="campoNoValido('nombre')">
+                         El formato debe ser nombre y apellidos
+                     </span>
+                </div>
+            </div>
+
+            <!-- Email -->
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Email</label>
+                <div class="col-sm-9">
+                    <input type="email"
+                           class="form-control"
+                           formControlName="email"
+                           placeholder="Email del usuario">
+
+                        <span class="form-text text-danger"
+                           *ngIf="campoNoValido('email')">
+                          {{ emailErrorMsg }}
+                     </span>
+                    <!-- Una forma de poner varios controles sobre una celda. El problema es que hay mucho codigo en el html -->
+                   <!--  <span class="form-text text-danger"
+                           *ngIf="emailRequired()">
+                         El email es obligatorio
+                     </span>
+
+                     <span class="form-text text-danger"
+                           *ngIf="emailPattern()">
+                         El texto no tiene formato de email
+                     </span>
+
+                     <span class="form-text text-danger"
+                           *ngIf="emailTomado()">
+                         Este email ya ha sido usado
+                     </span> -->
+                </div>
+            </div>
+
+            <!-- Username -->
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Username</label>
+                <div class="col-sm-9">
+                    <input type="text"
+                           class="form-control"
+                           formControlName="username"
+                           placeholder="Nombre código del usuario">
+
+                    <span class="form-text text-danger"
+                           *ngIf="campoNoValido('username')">
+                         El username no puede ser Julio
+                     </span>
+                </div>
+            </div>
+
+            <!-- Password -->
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Password</label>
+                <div class="col-sm-9">
+                    <input type="password"
+                           class="form-control"
+                           formControlName="password"
+                           placeholder="Password del usuario">
+
+                    <span class="form-text text-danger"
+                           *ngIf="campoNoValido('password')">
+                         El password debe ser mayor de 6 caracteres
+                     </span>
+                </div>
+            </div>
+
+            <!-- Confirmar Password -->
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Confirmar</label>
+                <div class="col-sm-9">
+                    <input type="password"
+                           class="form-control"
+                           formControlName="confPassword"
+                           placeholder="Confirmar la contraseña">
+
+                    <span class="form-text text-danger"
+                           *ngIf="campoNoValido('confPassword')">
+                         Los password deben ser iguales
+                     </span>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <!-- con miFormulario.pending lo que hacemos es que el botón esté bloqueado hasta que termine de calcular todo -->
+                    <button class="btn btn-primary float-end"
+                            [disabled]="miFormulario.pending"
+                            type="submit">
+                        Crear
+                    </button>
+                </div>
+            </div>
+
+        </form>
+
+    </div>
+</div>
+
+<h2>Form Valid: {{ miFormulario.valid }}</h2>
+<h2>Form Status: {{ miFormulario.status }}</h2>
+<h2>Form Pending: {{ miFormulario.pending }}</h2>
+<h2>Form erors</h2>
+<pre>{{ miFormulario.errors | json }}</pre>
+
+<h5>Nombre</h5>
+<pre>{{ miFormulario.controls.nombre.errors | json }}</pre>
+
+<h5>Email</h5>
+<pre>{{ miFormulario.controls.email.errors | json }}</pre>
+
+<h5>Username</h5>
+<pre>{{ miFormulario.controls.username.errors | json }}</pre>
+
+<h5>Password</h5>
+<pre>{{ miFormulario.controls.password.errors | json }}</pre>
+
+<h5>ConfPassword</h5>
+<pre>{{ miFormulario.controls.confPassword.errors | json }}</pre>
